@@ -86,11 +86,14 @@
 #     app.run(debug=True) # debug=True for development, turn off for production
 
 #2
+from dotenv import load_dotenv
+load_dotenv()
 
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify # Import jsonify
 from flask_sqlalchemy import SQLAlchemy
 #from flask_mail import Mail, Message
+from flask_migrate import Migrate # 2. Import Migrate from flask_migrate
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -99,6 +102,23 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_super_secret_key_here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, 'predictions.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+# --- Configuration ---
+# 3. Get SECRET_KEY from environment variable, provide a default for local dev
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'a_secret_key_for_dev_only')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Recommended to suppress warnings
+
+# 4. Configure DATABASE_URL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+
+# Fallback to SQLite if DATABASE_URL is not set (useful for local development without Postgres)
+if not app.config['SQLALCHEMY_DATABASE_URI']:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, 'predictions_local.db')
+    print("Using local SQLite database: predictions_local.db") # Debugging aid
+else:
+    print(f"Using database from DATABASE_URL: {app.config['SQLALCHEMY_DATABASE_URI']}") # Debugging aid
+
 db = SQLAlchemy(app)
 
 # Flask-Mail Configuration
@@ -111,6 +131,9 @@ db = SQLAlchemy(app)
 # app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER', 'Your Predictor App <your_email@example.com>')
 
 # mail = Mail(app)
+
+# 6. Initialize Flask-Migrate
+migrate = Migrate(app, db)
 
 # --- Database Models (no changes here) ---
 class User(db.Model):
@@ -130,10 +153,14 @@ class Prediction(db.Model):
 
     def __repr__(self):
         return f'<Prediction User ID: {self.user_id}, Team: {self.team_name}, Rank: {self.rank}>'
+    
+# 7. Remove db.create_all() from here
+# Flask-Migrate will handle creating/updating the database schema.
+# You will run 'flask db upgrade' manually (locally and on production).    
 
 # --- Create Database Tables ---
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#   db.create_all()
 
 # --- Flask Routes ---
 @app.route('/', methods=['GET'])
@@ -205,4 +232,5 @@ def submit_prediction():
 
 # --- Run the application ---
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
+    # change to False for PROD
