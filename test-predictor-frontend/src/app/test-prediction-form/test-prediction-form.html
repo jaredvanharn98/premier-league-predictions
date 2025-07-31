@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Predict the League!</h1>
+  <form (ngSubmit)="onSubmit()" #predictionForm="ngForm">
+    <div class="user-details">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="prediction.name" required #nameField="ngModel">
+      <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="error-message">
+        Name is required.
+      </div>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" [(ngModel)]="prediction.email" required email #emailField="ngModel">
+      <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="error-message">
+        <span *ngIf="emailField.errors?.['required']">Email is required.</span>
+        <span *ngIf="emailField.errors?.['email']">Enter a valid email.</span>
+      </div>
+    </div>
+
+    <h2>Team Predictions (1st to 20th)</h2>
+    <div class="team-list">
+      <div *ngFor="let team of prediction.teams; let i = index" class="team-input">
+        <label for="team{{ i }}">{{ i + 1 }}.</label>
+        <input type="text" id="team{{ i }}" name="team{{ i }}" [(ngModel)]="prediction.teams[i]" required #teamField="ngModel">
+        <div *ngIf="teamField.invalid && (teamField.dirty || teamField.touched)" class="error-message">
+          Team name is required.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!predictionForm.form.valid || isSubmitting">
+      {{ isSubmitting ? 'Submitting...' : 'Submit Prediction' }}
+    </button>
+
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+</div>
