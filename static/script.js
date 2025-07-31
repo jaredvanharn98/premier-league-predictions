@@ -157,10 +157,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Predefined Football Teams ---
     let currentTeamsOrder = [
         "Manchester City", "Arsenal", "Liverpool", "Aston Villa",
-        "Tottenham Hotspur", "Chelsea", "Newcastle United", "Manchester United",
-        "West Ham United", "Brighton & Hove Albion", "Wolverhampton Wanderers",
-        "AFC Bournemouth", "Fulham", "Crystal Palace", "Brentford",
-        "Everton", "Nottingham Forest", "Luton Town", "Burnley", "Sheffield United"
+        "Tottenham", "Chelsea", "Newcastle United", "Manchester United",
+        "West Ham", "Brighton", "Wolves",
+        "Bournemouth", "Fulham", "Crystal Palace", "Brentford",
+        "Everton", "Nottingham Forest", "Sunderland", "Burnley", "Leeds"
     ].sort(); // Sort alphabetically initially for a consistent starting point
 
     // --- Helper Functions ---
@@ -197,10 +197,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Re-initialize team order to default and re-render
         currentTeamsOrder = [
             "Manchester City", "Arsenal", "Liverpool", "Aston Villa",
-            "Tottenham Hotspur", "Chelsea", "Newcastle United", "Manchester United",
-            "West Ham United", "Brighton & Hove Albion", "Wolverhampton Wanderers",
-            "AFC Bournemouth", "Fulham", "Crystal Palace", "Brentford",
-            "Everton", "Nottingham Forest", "Luton Town", "Burnley", "Sheffield United"
+            "Tottenham", "Chelsea", "Newcastle United", "Manchester United",
+            "West Ham", "Brighton", "Wolves",
+            "Bournemouth", "Fulham", "Crystal Palace", "Brentford",
+            "Everton", "Nottingham Forest", "Sunderland", "Burnley", "Leeds"
         ].sort();
         renderTeamList();
     }

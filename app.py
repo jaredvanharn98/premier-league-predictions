@@ -99,15 +99,17 @@ from flask_migrate import Migrate # 2. Import Migrate from flask_migrate
 app = Flask(__name__)
 
 # --- Configuration ---
-app.config['SECRET_KEY'] = 'your_super_secret_key_here'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, 'predictions.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SECRET_KEY'] = 'your_super_secret_key_here'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, 'predictions.db')
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 # --- Configuration ---
 # 3. Get SECRET_KEY from environment variable, provide a default for local dev
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'a_secret_key_for_dev_only')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # Recommended to suppress warnings
+
+#postgresql://premierleaguepredictions_user:pBkP8MpXY0gxvS9ZtUmyTGhhnllgtvia@dpg-d25mjrnfte5s738b5940-a.oregon-postgres.render.com/premierleaguepredictions
 
 # 4. Configure DATABASE_URL
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')

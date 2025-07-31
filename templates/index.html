@@ -138,7 +138,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football League Predictor</title>
+    <title>Premier League Predictor 25/26</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -169,7 +169,7 @@
             background-color: #f5f5f5;
         }
         #teamList li.sortable-ghost { /* Class added by Sortable.js when dragging */
-            opacity: 0.2;
+            opacity: 0.9;
             background-color: #e0f2f7;
             border: 2px dashed #007bff;
         }
@@ -191,7 +191,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Predict the League!</h1>
+        <h1>Premier League Predictor 25/26</h1>
 
         <form id="predictionForm"> <div class="user-details">
                 <label for="name">Your Name:</label>
@@ -201,8 +201,8 @@
                 <input type="email" id="email" name="email" required>
             </div>
 
-            <h2>Order Your Top 20 Teams (Drag to reorder)</h2>
-            <p class="team-count">Drag and drop teams to set their final league position.</p>
+            <h2>Make Your Predictions Below (Drag to reorder)</h2>
+            <p class="team-count">Drag and drop teams to set their final league position</p>
 
             <ul id="teamList">
                 </ul>

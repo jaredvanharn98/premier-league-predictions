@@ -1,19 +1,25 @@
 body {
     font-family: sans-serif;
     margin: 20px;
-    background-color: #f4f4f4;
+    background-color: #032955;
 }
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #032955;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.team-count {
+    text-align: center;
+    color: #e3ecec;
+}
+
 h1, h2 {
     text-align: center;
-    color: #333;
+    color: #e3ecec;
 }
 .user-details, .team-list {
     margin-bottom: 20px;
@@ -22,12 +28,14 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #e3ecec;
 }
+
 input[type="text"], input[type="email"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #e3ecec;
     border-radius: 4px;
     box-sizing: border-box;
 }
